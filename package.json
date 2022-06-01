@@ -1,0 +1,24 @@
+{
+  "name": "pico-scoped",
+  "version": "1.0.0",
+  "description": "Simple beautiful semantic html components with scoped styles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greatwillow/pico-scoped.git"
+  },
+  "keywords": [],
+  "author": "Greg Denys",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/greatwillow/pico-scoped/issues"
+  },
+  "homepage": "https://github.com/greatwillow/pico-scoped#readme",
+  "devDependencies": {
+    "typescript": "^4.7.2"
+  }
+}
