@@ -2,7 +2,8 @@
   "name": "pico-scoped",
   "version": "1.0.0",
   "description": "Simple beautiful semantic html components with scoped styles.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/**/*"
   ],
@@ -10,13 +11,31 @@
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/greatwillow/pico-scoped.git"
   },
-  "keywords": [],
+  "keywords": [
+    "css",
+    "css-framework",
+    "dark-mode",
+    "dark-theme",
+    "lightweight",
+    "minimal",
+    "minimalist",
+    "minimalistic",
+    "native-html",
+    "scss-framework",
+    "semantic",
+    "scoped"
+  ],
   "author": "Greg Denys",
   "license": "MIT",
   "bugs": {
