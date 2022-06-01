@@ -1,1 +1,1 @@
-export const pico = "scoped"
+export const pico = 'scoped';
