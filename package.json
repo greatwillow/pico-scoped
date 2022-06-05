@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "jest --config jestconfig.json --passWithNoTests",
-    "process-files": "npx ts-node ./src/process-pico-files.ts",
+    "process-files": "cd src/ && npx ts-node ./process-pico-files.ts && cd ..",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
