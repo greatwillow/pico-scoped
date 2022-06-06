@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*"
+    "src/pico-processed-files/*.css"
   ],
   "scripts": {
     "test": "jest --config jestconfig.json --passWithNoTests",
