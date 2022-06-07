@@ -21,18 +21,24 @@ function handleError(error: Error, message: string) {
 	}
 }
 
-function createScopedPicoFile(originalFileName: string, originalCss: string) {
-	postcss([postcssPrefixWrap(picoStylesGlobalScopeName)])
+function createScopedPicoFile(
+	originalFileName: string, 
+	originalCss: string,
+	outputDirectory: string,
+	cssGlobalScopeName: string = picoStylesGlobalScopeName,
+	rootRegex: RegExp = rootCssPseudoClassRegex
+) {
+	postcss([postcssPrefixWrap(cssGlobalScopeName)])
 		.process(originalCss, { from: undefined })
 		.then((result: { css: string }) => {
-			const processedCss = result.css.replace(rootCssPseudoClassRegex, picoStylesGlobalScopeName)
+			const processedCss = result.css.replace(rootRegex, cssGlobalScopeName)
 			const processedCssFileName = `scoped.${originalFileName}`
-			const processedFileAndDirectory = `${processedCssFilesDirectory}/${processedCssFileName}`
+			const processedFileAndDirectory = `${outputDirectory}/${processedCssFileName}`
 
 			logWriteFileAction(processedFileAndDirectory)
 
-			if (!fs.existsSync(processedCssFilesDirectory)) {
-				fs.mkdirSync(processedCssFilesDirectory, { recursive: true });
+			if (!fs.existsSync(outputDirectory)) {
+				fs.mkdirSync(outputDirectory, { recursive: true });
 			}
 
 			fs.writeFile(
@@ -44,21 +50,29 @@ function createScopedPicoFile(originalFileName: string, originalCss: string) {
 		.catch(handleProcessingFileError)
 }
 
-function createScopedPicoFiles() {
-	const originalPicoFiles = [...fs.readdirSync(orignalCssFilesDirectory, handleReadFilesError)]
+function createScopedPicoFiles(
+	inputDirectory: string,
+	outputDirectory: string,	
+	) {
+	const originalPicoFiles = [...fs.readdirSync(inputDirectory, handleReadFilesError)]
 
 	originalPicoFiles.forEach((originalFileName) => {
-		const originalFileAndDirectory = `${orignalCssFilesDirectory}/${originalFileName}`
+		const originalFileAndDirectory = `${inputDirectory}/${originalFileName}`
 
 		logReadFileAction(originalFileAndDirectory)
 
-		fs.readFile(`${orignalCssFilesDirectory}/${originalFileName}`, (readFileError: Error, originalCss: string) => {
+		fs.readFile(`${inputDirectory}/${originalFileName}`, (readFileError: Error, originalCss: string) => {
 			handleReadFileError(readFileError)
-			createScopedPicoFile(originalFileName, originalCss)
+			createScopedPicoFile(originalFileName, originalCss, outputDirectory)
 		})
 	})
 }
 
-createScopedPicoFiles()
+createScopedPicoFiles(orignalCssFilesDirectory, processedCssFilesDirectory)
+
+export {
+	createScopedPicoFile,
+	createScopedPicoFiles
+}
 
 
