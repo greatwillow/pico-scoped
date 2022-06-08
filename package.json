@@ -1,6 +1,6 @@
 {
   "name": "pico-scoped",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple beautiful semantic html components with scoped styles.",
   "types": "lib/index.d.ts",
   "files": [
