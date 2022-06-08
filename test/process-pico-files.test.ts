@@ -9,7 +9,7 @@ const mockOutputDirectory = `${process.cwd()}/test/test-output-directory`
 const expectedOutputCssDirectory = `${process.cwd()}/test`
 const expectedOutputCssFileName = 'expected-output.css'
 
-describe('createScopedPicoFiles', async () => {
+describe('createScopedPicoFiles', () => {
 	beforeEach(() => {
 		if (fs.existsSync(mockOutputDirectory)) {
 			fs.rmdirSync(mockOutputDirectory, { recursive: true });
