@@ -2,7 +2,6 @@
   "name": "pico-scoped",
   "version": "1.0.0",
   "description": "Simple beautiful semantic html components with scoped styles.",
-  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "src/pico-processed-files/*.css"
@@ -12,7 +11,6 @@
     "process-files": "cd src/ && npx ts-node ./process-pico-files.ts && cd ..",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
