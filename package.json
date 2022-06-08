@@ -2,17 +2,15 @@
   "name": "pico-scoped",
   "version": "1.0.0",
   "description": "Simple beautiful semantic html components with scoped styles.",
-  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*"
+    "src/pico-processed-files/*.css"
   ],
   "scripts": {
     "test": "jest --config jestconfig.json --passWithNoTests",
-    "build": "tsc",
+    "process-files": "cd src/ && npx ts-node ./process-pico-files.ts && cd ..",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
@@ -45,6 +43,8 @@
   "devDependencies": {
     "@types/jest": "^27.5.1",
     "jest": "^28.1.0",
+    "postcss": "^8.4.14",
+    "postcss-prefixwrap": "1.30.2",
     "prettier": "^2.6.2",
     "ts-jest": "^28.0.3",
     "tslint": "^6.1.3",
