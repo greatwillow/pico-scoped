@@ -56,10 +56,13 @@ function createScopedPicoFiles(
 
         logReadFileAction(originalFileAndDirectory)
 		
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             fs.readFile(`${inputDirectory}/${originalFileName}`, async (readFileError: Error, originalCss: string) => {
-                handleReadFileError(readFileError)
-
+                if(readFileError) {
+                    handleReadFileError(readFileError)
+                    reject()
+                }
+				
                 await createScopedPicoFile(originalFileName, originalCss, outputDirectory)
 
                 resolve()
@@ -70,17 +73,20 @@ function createScopedPicoFiles(
     return promises
 }
 
-function processFiles(): Array<Promise<void>>  {
+async function processFiles(): Promise<void>  {
     const originalCssFilesDirectory = './pico-original-files'
-    const processedCssFilesDirectory = './pico-processed-files'
+    const processedCssFilesDirectory = '../files'
 
-    return createScopedPicoFiles(originalCssFilesDirectory, processedCssFilesDirectory)
+    Promise.all(createScopedPicoFiles(originalCssFilesDirectory, processedCssFilesDirectory)).then(() => {
+        process.stdout.write('Successfully completed writing output css files.')
+    })
 }
 
 export {
     createScopedPicoFile,
-    createScopedPicoFiles,
-    processFiles
+    createScopedPicoFiles
 }
+
+module.exports.processFiles = processFiles
 
 

@@ -4,13 +4,13 @@
   "description": "Simple beautiful semantic html components with scoped styles.",
   "types": "lib/index.d.ts",
   "files": [
-    "src/pico-processed-files/*.css"
+    "files/*.css"
   ],
   "scripts": {
     "test": "jest --config jestconfig.json --passWithNoTests",
     "lint": "npx eslint src/**/*.ts",
     "lint:fix": "npx eslint src/**/*.ts --fix",
-    "process-files": "cd src/ && npx ts-node ./process-pico-files.ts && cd ..",
+    "process-files": "cd src/ && npx ts-node -e \"require('./process-pico-files.ts').processFiles()\" && cd ..",
     "prepublishOnly": "npm test && npm run lint",
     "preversion": "npm run lint",
     "version": "git add -A src",
